@@ -8,14 +8,14 @@
   <style>
     body {
       margin: 0;
-      font-family: 'Georgia', serif;
+      font-family: Georgia, serif;
       text-align: center;
       color: #3b2f2f;
       background: linear-gradient(180deg, #f7f1e1, #e7d3b0);
     }
 
     header {
-      padding: 60px 20px;
+      padding: 60px 20px 20px;
     }
 
     h1 {
@@ -28,9 +28,9 @@
       font-size: 20px;
     }
 
+    /* FOTO COPPIA */
     .photo {
       margin: 20px auto;
-      max-width: 800px;
     }
 
     .photo img {
@@ -42,7 +42,7 @@
     }
 
     section {
-      padding: 40px 20px;
+      padding: 30px 20px 60px;
     }
 
     .box {
@@ -68,6 +68,42 @@
     a:hover {
       text-decoration: underline;
     }
+
+    /* COUNTDOWN */
+    .countdown .time {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 15px;
+      flex-wrap: wrap;
+    }
+
+    .countdown .time div {
+      background: #fff3e6;
+      border: 1px solid #e2c9a6;
+      padding: 15px 10px;
+      border-radius: 12px;
+      min-width: 70px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+
+    .countdown span {
+      display: block;
+      font-size: 26px;
+      font-weight: bold;
+      color: #6b3e2e;
+    }
+
+    .countdown small {
+      color: #8a5a44;
+      font-size: 12px;
+    }
+
+    /* MOBILE */
+    @media (max-width: 600px) {
+      h1 { font-size: 34px; }
+      p { font-size: 16px; }
+    }
   </style>
 </head>
 
@@ -84,7 +120,19 @@
   <img src="foto-coppia.jpg" alt="Alaa e Matteo">
 </div>
 
+<!-- COUNTDOWN -->
+<div class="box countdown">
+  <h2>Manca al nostro giorno</h2>
+  <div class="time">
+    <div><span id="days">0</span><small>giorni</small></div>
+    <div><span id="hours">0</span><small>ore</small></div>
+    <div><span id="minutes">0</span><small>min</small></div>
+    <div><span id="seconds">0</span><small>sec</small></div>
+  </div>
+</div>
+
 <section>
+
   <div class="box">
     <h2>Cerimonia</h2>
     <p>Sala Rossa, Campidoglio - Roma</p>
@@ -102,7 +150,30 @@
     <p>Conferma la tua presenza qui:</p>
     <a href="https://forms.gle/" target="_blank">Modulo Google 💌</a>
   </div>
+
 </section>
+
+<script>
+const weddingDate = new Date("2026-11-28T09:30:00").getTime();
+
+function updateCountdown() {
+  const now = new Date().getTime();
+  const diff = weddingDate - now;
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+  const seconds = Math.floor((diff / 1000) % 60);
+
+  document.getElementById("days").innerText = days;
+  document.getElementById("hours").innerText = hours;
+  document.getElementById("minutes").innerText = minutes;
+  document.getElementById("seconds").innerText = seconds;
+}
+
+setInterval(updateCountdown, 1000);
+updateCountdown();
+</script>
 
 </body>
 </html>
